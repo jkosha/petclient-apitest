@@ -1,25 +1,28 @@
 This project's goal is to resolve the testing exercise (check detail below).
-The project's implementation has been heavily affected by Trisha Gee's "Reactive Spring Boot: Part 2: Java REST Client" example from https://www.youtube.com/watch?v=iLcstbXDW6E
+The project's implementation has been inspired by Trisha Gee's 
+"Reactive Spring Boot: Part 2: Java REST Client" example from https://www.youtube.com/watch?v=iLcstbXDW6E
 
 
 
 Instructions
 
 
-    API Rest Service Testing Exercise
+API Rest Service Testing Exercise
 A good API service for testing purposes can be found here:
 https://petstore.swagger.io
 The task is to write a Java client that has one method:
 getPetsByStatus(PetStatus peStatus).
 and uses the following REST endpoint:
 https://petstore.swagger.io/#/pet/findPetsByStatus
-When you have done this write a Cucumber BDD test that uses the method you created to get the JSON
+
+When you have done this, write a Cucumber BDD test that uses the method you created to get the JSON
 response payload and validate how many pets have the status “available” and the name “doggie”.
 Additional Notes:
 
-The number of pets returned from the live service may vary so it
+The number of pets returned from the live service may vary, so it
 doesn’t matter if the test actually passes, so long as the failure is
 readable.
+
 If for any reason the swagger service was down, please use the json
 response file included with this pack and instead of a client that
 calls a REST API make the client just read the file and return
