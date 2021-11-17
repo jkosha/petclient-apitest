@@ -7,7 +7,8 @@ import lombok.Data;
 public enum PetStatus {
     AVAILABLE("available"),
     PENDING("pending"),
-    SOLD("sold");
+    SOLD("sold"),
+    NONEXISTENT("nonexistent");
 
     private String value;
 

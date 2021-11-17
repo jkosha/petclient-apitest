@@ -19,7 +19,7 @@ public class RestPetClient {
     public Flux<Pet> getPetsByStatus(PetStatus petStatus) {
 
         return webClient.get()
-                .uri("https://petstore.swagger.io/v2/pet/findByStatus?status={status}", PetStatus.AVAILABLE.getValue())
+                .uri("https://petstore.swagger.io/v2/pet/findByStatus?status={status}", petStatus.getValue())
                 .retrieve()
                 .bodyToFlux(Pet.class)
                 .doOnError(IOException.class, log::error);
