@@ -1,15 +1,23 @@
 This project's goal is to resolve the testing exercise (check detail below).
-The project's implementation has been inspired by Trisha Gee's 
-"Reactive Spring Boot: Part 2: Java REST Client" example from https://www.youtube.com/watch?v=iLcstbXDW6E
+The project's implementation has been inspired by Trisha Gee's
 
+"Reactive Spring Boot: Part 1: Kotlin REST Service"
+https://www.youtube.com/watch?v=coM6wWKau5E&t=210s
+
+"Reactive Spring Boot: Part 2: Java REST Client" 
+example from https://www.youtube.com/watch?v=iLcstbXDW6E
+
+Logging was inspired by:
+https://www.baeldung.com/spring-boot-logging
 
 
 Instructions
 
 
-API Rest Service Testing Exercise
+API Rest Service Testing Exercise 
 A good API service for testing purposes can be found here:
 https://petstore.swagger.io
+
 The task is to write a Java client that has one method:
 getPetsByStatus(PetStatus peStatus).
 and uses the following REST endpoint:

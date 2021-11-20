@@ -13,12 +13,11 @@ import java.util.List;
  * It is meant to test separate method, but cannot guarantee that application works as a whole.
  */
 class RestPetClientTest {
-    private List<Pet> getPetByStatus(PetStatus petStatus) {
+    private List<Pet> getPetByStatus(String status) {
         RestPetClient restPetClient = new RestPetClient(webclient);
-        Flux<Pet> pets = restPetClient.getPetsByStatus(petStatus);
-        List<Pet> resultingPets = pets.collectList().block();
+        Flux<Pet> pets = restPetClient.getPetsByStatus(status);
 
-        return resultingPets;
+        return pets.collectList().block();
     }
 
     private WebClient webclient = WebClient.builder().build();
@@ -28,7 +27,7 @@ class RestPetClientTest {
     }
 
     private void assertSomePetsWereReturned(List<Pet> resultingPets) {
-        Assertions.assertNotNull(resultingPets.size());
+        Assertions.assertNotNull(resultingPets);
         Assertions.assertTrue(resultingPets.size() > 0);
     }
 
@@ -36,7 +35,7 @@ class RestPetClientTest {
 
     @Test
     void shouldRetrieveAvailablePets() {
-        List<Pet> pets = getPetByStatus(PetStatus.AVAILABLE);
+        List<Pet> pets = getPetByStatus(PetStatus.AVAILABLE.name().toLowerCase());
 
         assertSomePetsWereReturned(pets);
         assertPetsHadCorrectStatus(PetStatus.AVAILABLE, pets);
@@ -44,8 +43,7 @@ class RestPetClientTest {
 
     @Test
     void shouldRetrievePendingPets() {
-        getPetByStatus(PetStatus.PENDING);
-        List<Pet> pets = getPetByStatus(PetStatus.PENDING);
+        List<Pet> pets = getPetByStatus(PetStatus.PENDING.name().toLowerCase());
 
         assertSomePetsWereReturned(pets);
         assertPetsHadCorrectStatus(PetStatus.PENDING, pets);
@@ -53,8 +51,7 @@ class RestPetClientTest {
 
     @Test
     void shouldRetrieveSoldPets() {
-        getPetByStatus(PetStatus.SOLD);
-        List<Pet> pets = getPetByStatus(PetStatus.SOLD);
+        List<Pet> pets = getPetByStatus(PetStatus.SOLD.name().toLowerCase());
 
         assertSomePetsWereReturned(pets);
         assertPetsHadCorrectStatus(PetStatus.SOLD, pets);
@@ -62,11 +59,9 @@ class RestPetClientTest {
 
     @Test
     void shouldNotRetrieveNonexistentPets() {
-        PetStatus petStatus = PetStatus.NONEXISTENT;
-        getPetByStatus(petStatus);
-        List<Pet> pets = getPetByStatus(petStatus);
+        List<Pet> pets = getPetByStatus(PetStatus.NONEXISTENT.name().toLowerCase());
 
-        Assertions.assertTrue(pets.size() == 0);
+        Assertions.assertEquals(0, pets.size());
     }
 
 

@@ -2,7 +2,8 @@ package com.nikitakoselev.apitestingexample.petclient;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public enum PetStatus {
     AVAILABLE("available"),
@@ -13,7 +14,7 @@ public enum PetStatus {
     private String value;
 
     PetStatus(String value) {
-        this.value = value;
+        this.value = value.toLowerCase();
     }
 
     @JsonValue
@@ -28,8 +29,11 @@ public enum PetStatus {
 
     @JsonCreator
     public static PetStatus fromValue(String text) {
+        Logger log = LoggerFactory.getLogger(PetStatus.class);
+        log.debug("from value = " + text);
         for (PetStatus b : PetStatus.values()) {
-            if (String.valueOf(b.value).equals(text)) {
+            log.debug("pet status value = " + b.value);
+            if (String.valueOf(b.value).equals(text.toLowerCase())) {
                 return b;
             }
         }
